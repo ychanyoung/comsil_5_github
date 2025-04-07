@@ -1,0 +1,13 @@
+
+
+DATAFILE="$HOME/mydata.txt"
+
+if [ $# -eq 0 ];then
+  echo "Usage: phone searchfor [...searchfor]"
+  echo "(You didnt tell me what you want to search for.)"
+  exit 1
+fi
+
+PATTERN=$(printf "%s|" "$@" | sed 's/|$//')
+
+egrep "$PATTERN" "$DATAFILE" | awk -f "$HOME/display.awk"
